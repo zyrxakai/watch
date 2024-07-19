@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy | ZYRX WATCH</title>
+    <link rel="stylesheet" href="{% static 'css/stylecom.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="{% static 'images/logoblack.png' %}" alt="logo" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="">Home</a></li>
+                    <!-- <li><a href="products.html">Products</a></li> -->
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.html">Contact</a></li>
+                    <li><a href="{% url 'account' %}">Account</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+            <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="continue2">
+        <h1>Your bag total is ₹29900.00 or ₹1450.00/mo.per</h1>
+        <br>
+        
+        <a href="cart.html">
+        <button class="form_btn">
+            <span class="form_btn-txt">Checkout</span>
+            <div class="form_btn-bg"></div>
+        </button></a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="hr">
+    <hr>
+</div>
+<br>
+<br>
+<br>
+<div class="rht-img">
+    <img src="{% static 'images/40-nc-alum-midnight-sport-band-midnight.jpeg' %}" alt="">
+</div>
+<div class="rht-box">
+    <h2>
+        ZYRX Watch SE GPS 40mm <br> Midnight Aluminium Case with <br> Midnight Sport Band - S/M</h2>
+        <h3>₹29900.00</h3>
+        <br>
+        <br>
+<hr>
+<br>
+<br>
+<br>
+<div class="subt">
+<p>Subtotal</p> 
+₹29900.00
+</div>
+<div class="ship">
+<p>Shipping</p>
+<p>FREE</p>
+</div>
+<br>
+<div class="hr-2">
+    <hr>
+</div>
+<div class="tot">
+    <p>Total</p>
+    <p>₹29900.00</p>
+    </div>
+    <br>
+    <a href="cart.html">
+        <button class="form_btn">
+            <span class="form_btn-txt">Checkout</span>
+            <div class="form_btn-bg"></div>
+        </button></a>
+</div>
+<hr>
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="tc">
+                <p>*Listed pricing is Maximum Retail Price (inclusive of all taxes).<br>
+                    <br>
+                    ‡No Cost EMI is available with the purchase of an eligible product made using eligible cards on 3- or 6-month tenures from most leading banks. Monthly pricing is rounded to the nearest rupee. Exact pricing will be provided by your bank, subject to your bank’s terms and conditions. Minimum order spend applies as per your card-issuing bank threshold. Offer cannot be combined with Zyrx Store for Education or Corporate Employee Purchase Plan pricing. Card eligibility is subject to terms and conditions between you and your card-issuing bank. Offer may be revised or withdrawn at any time without any prior notice.</p>
+                    <br>
+            </div>
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobile phone.</p>
+                    <div class="{% static 'images/app-logo' %}">
+                        <img src="{% static 'images/play-store.png' %}">
+                        <img src="{% static 'images/app-store.png' %}">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img style=" width: 40px; height: 25px;" src="{% static 'images/logoblack.png' %}">
+                    <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many.
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+                </div>
+                <div class="store">
+                    <p id="fstore">More ways to shop: <a href="index.html"> <span>Find a Zyrx Store</span></a> or <span>other retailer </span>near you. Or call <span>1234567890 </span></p>
+            </div>
+                <hr>
+          <p class="copyright">Copyright 2024 - Zyrx Inc. All rights reserved. Privacy Policy | Terms of Use | Sales Policy | Legal Site Map</p>
+        </div>
+    </div>
+
+
+    <!-- javascript -->
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px"
+            }
+            else {
+                MenuItems.style.maxHeight = "0px"
+            }
+        }
+    </script>
+
+</body>
+
+</html>

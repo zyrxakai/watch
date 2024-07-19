@@ -1,0 +1,758 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleslide.css">
+</head>
+<body>
+    <nav>
+        <a href="#">Mouthwash</a>
+        <a href="#">Portfolio</a>
+    </nav>
+    <a href="#" id="showreel">Showreel</a>
+
+    <div class="slider">
+        <div class="slider-wrapper">
+            <div class="slider-item">
+                <figure>
+                    <img src="wthd2.jpg" alt="">
+                </figure>
+            </div>
+            <div class="slider-item">
+                <figure>
+                    <img src="wthd2.jpg" alt="">
+                </figure>
+            </div>
+            <div class="slider-item">
+                <figure>
+                    <img src="wthd2.jpg" alt="">
+                </figure>
+            </div>
+            <div class="slider-item">
+                <figure>
+                    <img src="wthd2.jpg" alt="">
+                </figure>
+            </div>
+            <div class="slider-item">
+                <figure>
+                    <img src="wthd2.jpg" alt="">
+                </figure>
+            </div>
+        </div>
+        <div class="slider-progress">
+            <div class="slider-progress-bar"></div>
+        </div>
+    </div>
+    <div class="page">
+        
+    </div>
+</body>
+<script>
+    const lerp = (f0, f1, t) => (1 - t) * f0 + t * f1;
+    const clamp = (val, min, max) => Math.max(min, Math.min(val, max));
+
+    class DragScroll{
+        constructor(obj) {
+            this.el = document.querySelector(obj.el);
+            this.wrap = document.querySelector(obj.wrap);
+            this.items = document.querySelectorAll(obj.item);
+            this.bar = document.querySelector(obj.bar);
+            this.init();
+        }
+
+        init() {
+            this.progress = 0;
+            this.speed = 0;
+            this.oldX = 0;
+            this.x = 0;
+            this.playrate = 0;
+
+            this.bindings();
+            this.events();
+            this.calculate();
+            this.raf();
+        }
+
+        bindings() {
+            [
+                "events",
+                "calculate",
+                "raf",
+                "handleWheel",
+                "move",
+                "handleTouchStart",
+                "handleTouchMove",
+                "handleTouchEnd",
+            ].forEach((method) => {
+                this[method] = this[method].bind(this);
+            });
+        }
+
+        calculate() {
+            this.progress = 0;
+            this.wrapWidth = this.items[0].clientWidth * this.
+            items.length;
+            this.wrap.style.width = `${this.wrapWidth}px`;
+            this.maxScroll = this.wrapWidth - this.el.clientWidth;
+        }
+
+        handleWheel(e) {
+            this.progress += e.deltaY;
+            this.move();
+        }
+
+        handleTouchStart(e) {
+            e.preventDefault();
+            this.dragging = true;
+            this.startX = e.clientX || e.touches[0].clientX;
+        }
+
+        handleTouchMove(e) {
+            if(!this.dragging) return false;
+            const x =e.clientX || e.touches[0].clientX;
+            this.progress += (this.startX - x) * 2.5;
+            this.startX = x;
+            this.move();
+        }
+
+        handleTouchEnd() {
+            this.dragging = false;
+        }
+
+        move() {
+            this.progress = clamp(this.progress, 0, this.maxScroll);
+        }
+
+        events() {
+            window.addEventListener("resize", this.calculate);
+            window.addEventListener("wheel", this.handleWheel);
+
+            this.el.addEventListener("touchstart", this.handleTouchStart);
+            window.addEventListener("touchmove", this.handleTouchMove);
+            window.addEventListener("touchend", this.handleTouchEnd);
+
+
+            window.addEventListener("mousedown", this.handleTouchStart);
+            window.addEventListener("mousemove", this.handleTouchMove);
+            window.addEventListener("mouseup", this.handleTouchEnd);
+            document.body.addEventListener("mouseleave", this.handleTouchEnd);
+        }
+
+        raf() {
+            this.x = lerp(this.x, this.progress, 0.1);
+            this.playrate = this.x / this.maxScroll;
+
+            this.wrap.style.transform = `translatex(${-this.x}px)`;
+            this.bar.style.transform = `scaleX(${0.18 + this.playrate * 0.82})`;
+             
+            this.speed = Math.min(100, this.oldX - this.x);
+            this.oldX = this.x;
+
+            this.scale = lerp(this.scale, this.speed, 0.1);
+            this.items.forEach((item) => {
+                item.style.transform = `scale(${1 - Math.abs(this.speed) * 0.005})`;
+                item.querySelector("img").style.transform = `scaleX
+                (${
+                    1 + Math.abs(this.speed) * 0.004
+                })`;
+            });
+        }
+    }
+
+    const scroll = new DragScroll({
+        el: ".slider",
+        wrap: ".slider-wrapper",
+        item: ".slider-item",
+        bar: ".slider-progress-bar",
+    });
+
+    const animateScroll = () => {
+        requestAnimationFrame(animateScroll);
+        scroll.raf();
+    }
+
+    animateScroll();
+</script>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleslide.css">
+</head>
+<body>
+    <div class="container">
+        <div class="word">
+            <span>T</span>
+            <span>H</span>
+            <span>E</span>
+        </div>
+        <div class="word">
+            <span>C</span>
+            <span>L</span>
+            <span>E</span>
+            <span>V</span>
+            <span>E</span>
+            <span>L</span>
+            <span>A</span>
+            <span>N</span>
+            <span>D</span>
+
+        </div>
+    </div>
+
+    <script>
+        const textContainers = document.querySelectorAll(".word");
+
+        const defaultScale = 1;
+        const maxScale = 2;
+        const neighborScale = 1.5;
+
+        textContainers.forEach((textContainer) => {
+            const spans = textContainer.querySelectorAll
+            ("span");
+
+            textContainer.addEventListener("mousemove", (e) => {
+            const target = e.target;
+            const index = Array.from(spans).indexOf(target);
+
+            spans.forEach((span, i) =>{
+                let scale = defaultScale;
+
+                if (i === index) {
+                    scale = maxScale;
+                }else if (i === index - 1 || i === index + 1) {
+                    scale = neighborScale;
+                }
+
+                span.style.transform = `scaleY(${scale})`;
+            });
+        });
+
+        textContainer.addEventListener("mouseleave", () => {
+        spans.forEach((span) => {
+            span.style.transform = `scaleY(${defaultScale})`;
+        });
+    });
+        });
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleslide.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo"><a href="#">Flow Canvas</a></div>
+
+        <section class="hero pinned">
+            <h1>Sculped Zen <br> Playground</h1>
+        </section>
+
+        <section class="card pinned">
+            <div class="img"><img src="wthd2.jpg"></div>
+        </section>
+
+        <section class="card pinned">
+            <div class="img"><img src="wthd2.jpg"></div>
+        </section>
+
+        <section class="card pinned">
+            <div class="img"><img src="wthd2.jpg"></div>
+        </section>
+
+        <section class="card pinned">
+            <div class="img"><img src="wthd2.jpg"></div>
+        </section>
+
+        <section class="card pinned">
+            <div class="img"><img src="wthd2.jpg"></div>
+        </section>
+
+        <section class="card scroll">
+            <div class="img"><img src="wthd2.jpg"></div>
+        </section>
+        
+        <section class="footer">
+            <h1>Footer</h1>
+        </section>
+    </div>
+
+    <script src="scriptslide.js"></script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleslide.css">
+</head>
+<body>
+    <div class="container">
+        <section class="hero"></section>
+        <section class="services">
+            <div class="services-header">
+                <div class="col"></div>
+                <div class="col"><h1>All services</h1></div>
+            </div>
+
+            <div class="service">
+                <div class="service-info">
+                <h1>Lorem IPsum</h1>
+                <p>Lorem Ipsum aslkkm dkjcbjaskd kjnwjkj ckjsnlkawjm wajkndjk.</p>
+            </div>
+                <div class="service-img">
+                <div class="img"><img src="ww3.jpg" alt="" /></div>
+            </div>
+        </div>
+
+        <div class="service">
+            <div class="service-info">
+            <h1>Lorem IPsum</h1>
+            <p>Lorem Ipsum aslkkm dkjcbjaskd kjnwjkj ckjsnlkawjm wajkndjk.</p>
+        </div>
+            <div class="service-img">
+            <div class="img"><img src="wthd3.jpg" alt="" /></div>
+        </div>
+    </div>
+
+    <div class="service">
+        <div class="service-info">
+        <h1>Lorem IPsum</h1>
+        <p>Lorem Ipsum aslkkm dkjcbjaskd kjnwjkj ckjsnlkawjm wajkndjk.</p>
+    </div>
+        <div class="service-img">
+        <div class="img"><img src="ww1.jpg" alt="" /></div>
+    </div>
+</div>
+
+
+<div class="service">
+    <div class="service-info">
+    <h1>Lorem IPsum</h1>
+    <p>Lorem Ipsum aslkkm dkjcbjaskd kjnwjkj ckjsnlkawjm wajkndjk.</p>
+</div>
+    <div class="service-img">
+    <div class="img"><img src="ww2.jpg" alt="" /></div>
+</div>
+</div>
+
+<div class="service">
+    <div class="service-info">
+    <h1>Lorem IPsum</h1>
+    <p>Lorem Ipsum aslkkm dkjcbjaskd kjnwjkj ckjsnlkawjm wajkndjk.</p>
+</div>
+    <div class="service-img">
+    <div class="img"><img src="wthd2.jpg" alt="" /></div>
+</div>
+</div>
+
+        </section>
+        <section class="footer"></section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.1/dist/lenis.min.js"></script>
+
+    <script src="scriptslide.js"></script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>GSAP ScrollTrigger Slider</title>
+	<link rel="icon" href="img/icon.jpg" type="icon/x-icon">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="styleslide.css">
+</head>
+
+<body>
+
+	<div class="wrapp">
+
+		<header class="header">
+			<div class="content">
+				<h1 class="title">gsap scroll<span class="stroke">slider</span></h1>
+			</div>
+		</header>
+
+		<main class="main">
+
+
+			<section class="section-slider gsap_slider">
+
+				<div class="content">
+
+					<div class="section__slider gsap_h">
+
+						
+						<div class="gsap__bl">
+
+							<div class="gsap__inner">
+
+								<div class="gsap__track">
+
+									<div class="gsap__item">
+										<span class="gsap__item-img">
+											<img src="wthd3.jpg" alt="1">
+										</span>
+                                        <div class="gsap__item-txt">
+                                            <span class="gsap__item-title">Creative images</span>
+                                        </div>
+									</div>
+
+                                    <div class="gsap__item">
+										<span class="gsap__item-img">
+											<img src="wthd2.jpg" alt="1">
+										</span>
+									</div>
+
+                                    <div class="gsap__item">
+										<span class="gsap__item-img">
+											<img src="wthd1.jpg" alt="1">
+										</span>
+									</div>
+
+                                    <div class="gsap__item">
+										<span class="gsap__item-img">
+											<img src="ww1.jpg" alt="1">
+										</span>
+									</div>
+
+                                    <div class="gsap__item">
+										<span class="gsap__item-img">
+											<img src="ww2.jpg" alt="1">
+										</span>
+									</div>
+
+                                    <div class="gsap__item">
+										<span class="gsap__item-img">
+											<img src="wimg1.jpg" alt="1">
+										</span>
+									</div>
+
+                                    <div class="gsap__item">
+										<span class="gsap__item-img">
+											<img src="wimg3.jpg" alt="1">
+										</span>
+									</div>
+
+                                    <div class="gsap__item">
+										<span class="gsap__item-img">
+											<img src="wthd4.jpg" alt="1">
+										</span>
+									</div>
+
+                                    <div class="gsap__item">
+										<a href="#" class="gsap__item-link">
+                                            <span>View more</span>
+                                        </a>
+										</span>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+						
+					</div>
+				</div>
+			</section>
+
+
+			<section class="section-text">
+				<div class="content">
+					<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos voluptatem fugit accusamus fuga
+						vero
+						quos,
+						sint est laboriosam eveniet ea! Ducimus illum hic quas dolorem minima eius? Laboriosam iure
+						deserunt
+						totam sequi atque porro, dignissimos dolore sed laudantium. Ducimus modi corporis quaerat
+						autem
+						voluptates, quis, facere minima sequi reprehenderit itaque tempore illum perspiciatis
+						delectus
+						maiores!
+						Aliquam placeat necessitatibus omnis voluptatem molestias repellat repudiandae quia ad quas,
+						in
+						accusantium, est enim esse quidem illo dolorem! Dolor, quam voluptatem! Facilis voluptatem
+						tempore
+						repellat accusamus quidem illo molestias odio, consequuntur rem mollitia dolores praesentium
+						quisquam
+						accusantium quo?</p>
+				</div>
+			</section>
+		</main>
+
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.0/bundled/lenis.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+	<script src="scriptslide.js"></script>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Zyrx</title>
+	<link rel="icon" href="img/icon.jpg" type="icon/x-icon">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style/normalize.css">
+	<link rel="stylesheet" href="styleslide.css">
+</head>
+
+<body>
+
+	<!-- div .wrapp -->
+	<div id="luxy" class="wrapp">
+
+		<!-- div .header -->
+
+
+		<header class="header">
+			<h1 class="title" data-splitting><span class="title_paralax">zyrx</span><br><span class="stroke">WATCH<br>
+					Pro Series</span></h1>
+			<div class="header__img">
+				<a href="index.html"><img src="wthd3.jpg" alt="1"></a>
+			</div>
+			<div class="header__marq">
+				<div class="header__marq-wrapp">
+					<span class="header__marq-txt">Smarter.
+                        Brighter.
+                        Mightier.
+						<span class="header__marq-star">
+							<img src="star.svg" alt="">
+						</span>
+					</span>
+					<span class="header__marq-txt">Smarter.
+                        Brighter.
+                        Mightier.
+						<span class="header__marq-star">
+							<img src="star.svg" alt="">
+						</span>
+					</span>
+					<span class="header__marq-txt">Smarter.
+                        Brighter.
+                        Mightier.
+						<span class="header__marq-star">
+							<img src="star.svg" alt="">
+						</span>
+					</span>
+					<span class="header__marq-txt">Smarter.
+                        Brighter.
+                        Mightier.
+						<span class="header__marq-star">
+							<img src="star.svg" alt="">
+						</span>
+					</span>
+				</div>
+			</div>
+		</header>
+
+		<main class="main">
+
+			<!-- div .about -->
+			<section class="about">
+				<div class="about__wrapp">
+					<div class="about__img">
+						<img src="ww1.jpg" alt="2">
+					</div>
+					<div class="about__txt">
+						<h2 class="section-title">abo<span class="stroke">ut</span>
+							<span class="section-title__square"></span>
+						</h2>
+						<p class="about__p">Smarter.
+                            Brighter.
+                            Mightier.
+                            
+                            Our most powerful chip in Zyrx Watch ever. A magical way to use your zyrx Watch without touching the screen. A display that’s twice as bright. And now you can choose a watch case and strap combination that’s carbon neutral.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- div .benefits -->
+			<section class="benefits">
+				<div class="content">
+					<h2 class="section-title">benef<span class="stroke">its</span>
+						<span class="section-title__square"></span>
+					</h2>
+
+					<ul class="benefits__list">
+						<li class="benefits__item">
+							<span class="benefits__num" data-speed="-200">/01</span>
+							<p class="benefits__p">Play and pause music while carrying groceries.
+							</p>
+						</li>
+						<li class="benefits__item">
+							<span class="benefits__num" data-speed="-150">/02</span>
+							<p class="benefits__p">Answer a call while paddleboarding.
+							</p>
+						</li>
+						<li class="benefits__item">
+							<span class="benefits__num" data-speed="-150">/03</span>
+							<p class="benefits__p">Stop a timer while baking a pie.
+							</p>
+						</li>
+						<li class="benefits__item">
+							<span class="benefits__num" data-speed="-150">/04</span>
+							<p class="benefits__p">Stop a timer while baking a pie.
+							</p>
+						</li>
+						<li class="benefits__item">
+							<span class="benefits__num" data-speed="-110">/05</span>
+							<p class="benefits__p">Check your Smart Stack while holding your toddler.
+							</p>
+						</li>
+						<li class="benefits__item">
+							<span class="benefits__num" data-speed="-200">/06</span>
+							<p class="benefits__p">Reply to a message while walking the dog.
+							</p>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- div .work -->
+			<section class="work">
+				<div class="content">
+					<h2 class="section-title">Our &nbsp; &nbsp; <span class="stroke">Collections</span>
+						<span class="section-title__square"></span>
+					</h2>
+				</div>
+
+				<div class="work__wrapp">
+					<div class="work__item" data-speed="-300">
+						<span class="work__item-num" data-speed="-1000">/001</span>
+						<div class="work__item-img">
+							<img src="ww2.jpg" alt="3">
+						</div>
+					</div>
+					<div class="work__item" data-speed="-600">
+						<span class="work__item-num" data-speed="-500">/002</span>
+						<div class="work__item-img">
+							<img src="ww3.jpg" alt="4">
+						</div>
+					</div>
+					<div class="work__item" data-speed="-700">
+						<span class="work__item-num" data-speed="-700">/003</span>
+						<div class="work__item-img">
+							<img src="ww4.jpg" alt="5">
+						</div>
+					</div>
+					<div class="work__item" data-speed="-400">
+						<span class="work__item-num" data-speed="-200">/004</span>
+						<div class="work__item-img">
+							<img src="wthd1.jpg" alt="6">
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- div .serv -->
+			<section class="serv">
+				<div class="content">
+					<h2 class="section-title">servic<span class="stroke">es</span>
+						<span class="section-title__square"></span>
+					</h2>
+
+					<div class="serv__list">
+						<div class="serv__item">
+							<span class="serv__item-arrow" data-speed="500">
+								<img src="arrow.svg" alt="">
+							</span>
+							<div class="serv__item-txt">
+								<span class="serv__item-text">/Graphic Design</span>
+							</div>
+						</div>
+						<div class="serv__item">
+							<span class="serv__item-arrow" data-speed="400">
+								<img src="arrow.svg" alt="">
+							</span>
+							<div class="serv__item-txt">
+								<span class="serv__item-text">/UX/UI Design</span>
+							</div>
+						</div>
+						<div class="serv__item">
+							<span class="serv__item-arrow" data-speed="800">
+								<img src="arrow.svg" alt="">
+							</span>
+							<div class="serv__item-txt">
+								<span class="serv__item-text">/Web Design</span>
+							</div>
+						</div>
+						<div class="serv__item">
+							<span class="serv__item-arrow" data-speed="600">
+								<img src="arrow.svg" alt="">
+							</span>
+							<div class="serv__item-txt">
+								<span class="serv__item-text">/Brend Design</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- div .footer -->
+		<footer class="footer">
+			<div class="footer__div">
+				<span data-speed="-300">z</span>
+				<span data-speed="100">y</span>
+				<span data-speed="300">r</span>
+				<span data-speed="-300">x</span>
+				<span data-speed="350">w</span>
+				<span data-speed="200">a</span>
+				<span data-speed="-310">t</span>
+				<span data-speed="200">c</span>
+				<span data-speed="-340">h</span>
+				<span data-speed="-100">e</span>
+				<span data-speed="300">s</span>
+			</div>
+		</footer>
+	</div>
+	<!-- /div .wrapp END -->
+	<script src="splitting.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+	<script src="luxy.js"></script>
+	<script src="scriptslide.js"></script>
+</body>
+
+</html>

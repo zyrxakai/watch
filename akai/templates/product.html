@@ -1,0 +1,172 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy | ZYRX WATCH</title>
+    <link rel="stylesheet" href="{% static 'css/stylecom.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="{% static 'images/logoblack.png' %}" alt="logo" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <!-- <li><a href="products.html">Products</a></li> -->
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.html">Contact</a></li>
+                    <li><a href="{% url 'account' %}">Account</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+            <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+
+        <div class="introvid">
+       <video src="{% static 'images/introvid.mp4' %}" autoplay loop muted></video>
+        </div>
+
+    <div class="small-container">
+
+        <div class="heading">
+            <h1>Explore the line-up.</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <a href="{% url 'details_product' %}"><img src="{% static 'images/product1.png' %}"></a>
+                <h4>ZYRX Watch SE</h4>
+                <h6>&nbsp; &nbsp; &nbsp; All the essentials.<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; Light on price.</h6>
+                <p>From ₹29900.00*</p>
+                <a href="{% url 'details_product' %}"><button id="buy_button" type="button">Buy</button></a>
+
+            </div>
+            <div class="col-4">
+                <img src="{% static 'images/product2.png' %}">
+                <h4>ZYRX Watch Series 9</h4>
+                <h6>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Powerful sensors,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; advanced health features.</h6>
+                <p>From ₹41900.00*</p>
+                <a href="{% url 'details_product' %}"><button id="buy_button" type="button">Buy</button></a>
+
+            </div>
+            <div class="col-4">
+                <img src="{% static 'images/product3.png' %}">
+                <h4>ZYRX Watch Ultra 2</h4>
+                <h6>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;The most rugged<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;and capable.</h6>
+                <p>₹89900.00*</p>
+                <a href="{% url 'details_product' %}"><button id="buy_button" type="button">Buy</button></a>
+            </div>
+
+            <div class="mid-head">
+                <h1>Why ZYRX is the best<br>
+                    place to buy ZYRX Watch.</h1>
+            </div>
+            <div class="spcl-box">
+                <div class="box-1">
+                    <img src="{% static 'images/wallet.png' %}" alt="" />
+                    <h1>Monthly payment<br>
+                    options available.</h1>
+                    <p>choose the easy way to finance with <br>
+                    convenient monthly payment options.</p>
+                </div>
+
+                <div class="box-2">
+                    <img src="{% static 'images/delivery.png' %}" alt="">
+                    <h1>Get flexible delivery<br>
+                    and easy pickup.</h1>
+                    <p>Get free delivery or pickup at your <br>
+                    ZYRX store.</p>
+                </div>
+
+                <div class="box-3">
+                    <img src="{% static 'images/ccare.png' %}" alt="">
+                    <h1>Shop with a specialist.</h1>
+                    <p>Let us guide you and answer all of <br>
+                    your questions.</p>
+                </div>
+
+            </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="tc">
+                <p>*Listed pricing is Maximum Retail Price (inclusive of all taxes).<br>
+                    <br>
+                    ‡No Cost EMI is available with the purchase of an eligible product made using eligible cards on 3- or 6-month tenures from most leading banks. Monthly pricing is rounded to the nearest rupee. Exact pricing will be provided by your bank, subject to your bank’s terms and conditions. Minimum order spend applies as per your card-issuing bank threshold. Offer cannot be combined with Zyrx Store for Education or Corporate Employee Purchase Plan pricing. Card eligibility is subject to terms and conditions between you and your card-issuing bank. Offer may be revised or withdrawn at any time without any prior notice.</p>
+                    <br>
+            </div>
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobile phone.</p>
+                    <div class="{% static 'images/app-logo' %}">
+                        <img src="{% static 'images/play-store.png' %} ">
+                        <img src="{% static 'images/app-store.png' %}">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img style=" width: 40px; height: 25px;" src="{% static 'images/logoblack.png' %}">
+                    <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many.
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+                </div>
+                <div class="store">
+                    <p id="fstore">More ways to shop: <a href="index.html"> <span>Find a Zyrx Store</span></a> or <span>other retailer </span>near you. Or call <span>1234567890 </span></p>
+            </div>
+                <hr>
+          <p class="copyright">Copyright 2024 - Zyrx Inc. All rights reserved. Privacy Policy | Terms of Use | Sales Policy | Legal Site Map</p>
+        </div>
+    </div>
+
+    <!-- javascript -->
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px"
+            }
+            else {
+                MenuItems.style.maxHeight = "0px"
+            }
+        }
+    </script>
+    
+
+</body>
+
+</html>
