@@ -37,27 +37,43 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
+                    {% if messages %}
+                    <div class="message-container">
+                        {% for messages in messages %}
+                        <div>
+                            <li class="{{ message.tags }}">{{ message }}</li>
+
+                        </div>
+                        {% endfor %%}
+                    </div>
+                    {% endif %}
                     <img src="{% static 'images/file.png' %}" width="100%">
                 </div>
                 <div class="col-2">
-                    <div class="form-container">
+                    <div style="border-radius: 5px;" class="form-container">
                         <div class="form-btn">
                             <span onclick="login()">Login</span>
                             <span onclick="register()">Register</span>
                             <hr id="Indicator">
                         </div>
-                        <form id="LoginForm">
-                            <input type="text" placeholder="Username">
-                            <input type="password" placeholder="Password">
-                            <button type="submit" class="btn">Login</button>
+                        <form id="LoginForm" method="post" enctype="multipart/form-data">
+                             {% csrf_token %}
+                            <input type="text" name="username" placeholder="Username">
+                            <input type="password" name="password" placeholder="Password">
+                            <button type="submit" name"login" class="btn">Login</button>
                             <a href="">Forget Password</a>
                         </form>
 
-                        <form id="RegForm">
-                            <input type="text" placeholder="Username">
-                            <input type="email" placeholder="Email">
-                            <input type="password" placeholder="Password">
-                            <button type="submit" class="btn">Register</button>
+                        <form style="margin-top:-50px;" id="RegForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="text" name="username" required placeholder="Username">
+                            <input type="email" name="email" required placeholder="Email">
+                            <input type="password" name="password" minlength="8" required placeholder="Password">
+                            <input type="text" name="address" required placeholder="Address">
+                            <input type="number" name="phone" required placeholder="Phone">
+
+
+                            <button type="submit" name="register" class="btn">Register</button>
                         </form>
                     </div>
                 </div>
@@ -140,7 +156,15 @@
 
         }
     </script>
-
+{% if register %}
+    <script>
+        register()
+    </script>
+    {% else %}
+    <script>
+        login()
+    </script>
+    {% endif %}
 </body>
 
 </html>
