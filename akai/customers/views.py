@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from . models import Customer
 from django.contrib import messages
 
+
+def sign_out(request):
+    logout(request)
+    return redirect('home')
 
 # Create your views here.
 def show_account(request):
@@ -42,14 +46,12 @@ def show_account(request):
             print(request.POST)
             username = request.POST.get('username')
             password = request.POST.get('password')
-
             print(username, password)
-
             user=authenticate(username=username, password=password)
             print(user)
             
             if user:
-                login(request, user)
+                login(request,user)
                 return redirect('home')
             else:
                 messages.error(request,'invalid User')

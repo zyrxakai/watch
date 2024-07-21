@@ -16,18 +16,18 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <a href="index.html"><img src="{% static 'images/logoblack.png' %}" alt="logo" width="125px"></a>
+                <a href="{% url 'home' %}"><img src="{% static 'images/logoblack.png' %}" alt="logo" width="125px"></a>
             </div>
             <nav>
                 <ul id="MenuItems">
-                    <li><a href="">Home</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
                     <!-- <li><a href="products.html">Products</a></li> -->
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="about.html">Contact</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'about' %}">Contact</a></li>
                     <li><a href="{% url 'account' %}">Account</a></li>
                 </ul>
             </nav>
-            <a href="cart.html"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+            <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
             <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
     </div>
@@ -37,7 +37,7 @@
         <h1>Your bag total is ₹29900.00 or ₹1450.00/mo.per</h1>
         <br>
         
-        <a href="cart.html">
+        <a href="{% url 'pay' %}">
         <button class="form_btn">
             <span class="form_btn-txt">Checkout</span>
             <div class="form_btn-bg"></div>
@@ -82,7 +82,7 @@
     <p>₹29900.00</p>
     </div>
     <br>
-    <a href="cart.html">
+    <a href="{% url 'pay' %}">
         <button class="form_btn">
             <span class="form_btn-txt">Checkout</span>
             <div class="form_btn-bg"></div>
