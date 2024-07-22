@@ -51,7 +51,7 @@ def show_account(request):
             print(user)
             
             if user:
-                login(request,user)
+                login(request, user)
                 return redirect('home')
             else:
                 messages.error(request,'invalid User')

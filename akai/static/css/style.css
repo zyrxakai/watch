@@ -379,10 +379,11 @@ h3{
   .overlay button {
     padding: 1.2vw 3vw;
     border-radius: 50px;
-    background: lightblue;
+    background: transparent;
     border: 3px solid #fff;
     outline: none;
     color: blue;
+    text-shadow: 2px solid black;
     cursor: pointer;
     font-weight: 800;
     transition: 1s ease;
