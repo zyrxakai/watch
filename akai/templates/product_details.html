@@ -24,10 +24,20 @@
                     <!-- <li><a href="products.html">Products</a></li> -->
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'about' %}">Contact</a></li>
+
+                    {% if not user.is_authenticated %}
                     <li><a href="{% url 'account' %}">Account</a></li>
+                    {% else %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
+        
                 </ul>
             </nav>
+            {% if user.is_authenticated %}
             <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+            {% else %}
+            <a href="{% url 'account' %}"></a>
+            {% endif %}
             <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
     </div>
@@ -58,7 +68,7 @@
                     <h1>40 mm</h1>
                     <p>From ₹1450.00/mo. <br>
                         or ₹29900.00</p>
-                        <input id="click-1" type="radio">
+                        <input id="click-1" type="radio" required>
                     </div>
                 
 
@@ -66,7 +76,7 @@
                     <h1>42 mm</h1>
                     <p>From ₹1490.00/mo. <br>
                         or ₹31900.00</p>
-                        <input id="click-2" type="radio">
+                        <input id="click-2" type="radio" required>
                 </div>
         </div>
             
@@ -83,6 +93,7 @@
             {% csrf_token %}
 
         <input type="hidden" value="{{product.id}}" name="product_id" /> {% endcomment %}
+        
         <a href="{% url 'cart' %}">
         <button class="form_btn">
             <span class="form_btn-txt">Continue</span>

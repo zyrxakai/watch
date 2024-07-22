@@ -8,6 +8,9 @@ def home(request):
 def pay(request):
     return render(request, 'pay.html')
 
+def account(request):
+    return render(request, 'account.html')
+
 def about(request):
     return render(request, 'about.html')
 

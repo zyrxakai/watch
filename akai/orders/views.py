@@ -20,4 +20,4 @@ def add_to_cart(request):
             owner=cart_obj,
             quantity=quantity
         )
-    return redirect('cart')
+    return redirect('pay')

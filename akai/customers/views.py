@@ -11,49 +11,54 @@ def sign_out(request):
 
 # Create your views here.
 def show_account(request):
-    context={}
+    context = {}
 
-    if request.POST and 'register' in request.POST:
-        context['register']=True
-        try:
-            username=request.POST.get('username')
-            password=request.POST.get('password')
-            email=request.POST.get('email')
-            address=request.POST.get('address')
-            phone=request.POST.get('phone')
-            #creates user account
-            user=User.objects.create_user(
-                username=username,
-                password=password,
-                email=email
-            )
-            #creates customer account
-            customer=Customer.objects.create(
-                user=user,
-                phone=phone,
-                address=address
-            )
-            success_message="User Registered Successfully"
-            messages.success(request,success_message)
+    if request.method == 'POST':
+        if 'register' in request.POST:
+            context['register'] = True
+            try:
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+                email = request.POST.get('email')
+                address = request.POST.get('address')
+                phone = request.POST.get('phone')
+                
+                # creates user account
+                user = User.objects.create_user(
+                    username=username,
+                    password=password,
+                    email=email
+                )
+                
+                # creates customer account
+                customer = Customer.objects.create(
+                    user=user,
+                    phone=phone,
+                    address=address
+                )
+                success_message = "User Registered Successfully"
+                messages.success(request, success_message)
 
-        except Exception as e:
-            error_message="Duplicate Username"
-            messages.error(request,error_message)
-        context={}
-    if request.POST and 'login' in request.POST:
-            context['register']=False
+            except Exception as e:
+                error_message = "Duplicate Username"
+                messages.error(request, error_message)
+            context = {}
 
-            print(request.POST)
+        elif 'login' in request.POST:
+            context['register'] = False
+
             username = request.POST.get('username')
             password = request.POST.get('password')
-            print(username, password)
-            user=authenticate(username=username, password=password)
-            print(user)
+            user = authenticate(username=username, password=password)
             
             if user:
                 login(request, user)
-                return redirect('home')
+                return redirect('home')  # Ensure 'home' is a valid URL name in your urls.py
             else:
-                messages.error(request,'invalid User')
+                messages.error(request, 'Invalid User')
 
     return render(request, 'account.html', context)
+
+def logout_view(request):
+    logout(request)
+    return redirect('account')
