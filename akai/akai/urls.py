@@ -26,10 +26,11 @@ urlpatterns = [
     path('pay/',views.pay, name='pay'),
     path('account/', views.account, name='account'),
     path('about/', views.about, name='about'),
-    path('prod', views.prod, name="prod"),
+    path('prod/', views.prod, name="prod"),
     path('', include('products.urls')),
     path('customer/', include('customers.urls')),
-    path('orders/', include('orders.urls'))
+    path('orders/', include('orders.urls')),
+    path('paypal/', views.paypal, name='paypal')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

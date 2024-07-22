@@ -16,3 +16,6 @@ def about(request):
 
 def prod(request):
     return render(request, 'product.html')
+
+def paypal(request):
+    return render(request, 'paypal.html')

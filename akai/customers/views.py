@@ -55,7 +55,7 @@ def show_account(request):
                 login(request, user)
                 return redirect('home')  # Ensure 'home' is a valid URL name in your urls.py
             else:
-                messages.error(request, 'Invalid User')
+                messages.error(request, 'Invalid Username or password')
 
     return render(request, 'account.html', context)
 
