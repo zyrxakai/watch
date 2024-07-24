@@ -53,7 +53,7 @@ def show_account(request):
             
             if user:
                 login(request, user)
-                return redirect('home')  # Ensure 'home' is a valid URL name in your urls.py
+                return redirect('prod')  # Ensure 'home' is a valid URL name in your urls.py
             else:
                 messages.error(request, 'Invalid Username or password')
 
